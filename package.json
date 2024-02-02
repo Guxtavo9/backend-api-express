@@ -1,0 +1,25 @@
+{
+  "name": "backend-api-express",
+  "version": "1.0.0",
+  "description": "Projeto node com express, prisma, zod, no padrão do projeto MVC.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "keywords": [
+    "js",
+    "express",
+    "prisma",
+    "zod",
+    "api",
+    "jwt",
+    "mvc"
+  ],
+  "author": "Gustavo Pereira",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}
+ 
