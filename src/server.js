@@ -15,8 +15,6 @@ app.post("/post", (req, res) => {
   });
 });
 
-app.
-
 app.listen(PORT, () => {
   console.log(`Server running on ${HOST}:${PORT}`);
 });
