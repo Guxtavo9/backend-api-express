@@ -1,7 +1,11 @@
-const getById = (req, res) => {
+import userModel from "../../models/userModel.js";
+
+const getById = async (req, res) => {
   const id = req.params.id;
-  res.json({
-    message: `Esta é a Rota do Usuario ${id}`,
+  const user = await userModel.getById(parseInt(id))
+  return res.status(200).json({
+    sucess: `o Usuario ${id} ta ai`,
+    user
   });
 };
 
