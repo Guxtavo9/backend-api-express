@@ -1,7 +1,11 @@
-const removeUser = (req, res) => {
-    const id = req.params.id;
-    res.json({
-      message: `Esta é a Rota do Product ${id} delete`,
+import productModel from "../../models/productModel.js";
+const removeProduct = async (req, res) => {
+    const id = parseInt(req.params.id)
+    const morte = await prisma.productModel.deletear(id)
+
+    return res.json({
+      message: `O Usuario ${id} Morreu`,
     });
+    morte
   }
-  export default removeUser
+  export default removeProduct

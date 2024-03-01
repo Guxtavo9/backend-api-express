@@ -4,7 +4,7 @@ const getById = async (req, res) => {
   const id = req.params.id;
   const user = await userModel.getById(parseInt(id))
   return res.status(200).json({
-    sucess: `o Usuario ${id} ta ai`,
+    success: `o Usuario ${id} ta ai`,
     user
   });
 };
