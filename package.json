@@ -8,8 +8,8 @@
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "prisma:generate": "npx prisma generate",
-    "push": "prisma db push",
-    "pull": "prisma db pull"
+    "push": "npx prisma db push",
+    "pull": "npx prisma db pull"
   },
   "keywords": [
     "js",
