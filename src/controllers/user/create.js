@@ -2,8 +2,6 @@ import userModel from "../../models/userModel.js";
 // import { zodErrorFormat } from "../../helpers/zodErrorFormat.js";
 
 const create = async (req, res) => {
-
-  try{}catch{}
   const { name, email, avatar } = req.body;
   const result = userModel.validadeUserToCreate(name, email, avatar);
 
@@ -15,7 +13,7 @@ const create = async (req, res) => {
     errorFormated.avatar ? errorFormated.avatar = errorFormated.avatar._errors : null
     return res.status(400).json({
       error: "dados de cadastro invalidos",
-      fields: rerrorFormated
+      fields: errorFormated
     });
   }
 
