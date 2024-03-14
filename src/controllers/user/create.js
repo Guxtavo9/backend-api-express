@@ -4,16 +4,12 @@ import userModel from "../../models/userModel.js";
 const create = async (req, res) => {
   const { name, email, avatar } = req.body;
   const result = userModel.validadeUserToCreate(name, email, avatar);
-
+  console.log(result);
   if (!result.success) {
-    const errorFormated = result.error.format()
-    delete errorFormated._errors
-    errorFormated.name ? errorFormated.name = errorFormated.name._errors : null
-    errorFormated.email ? errorFormated.email = errorFormated.email._errors : null
-    errorFormated.avatar ? errorFormated.avatar = errorFormated.avatar._errors : null
+    const errorFormated = result.error.flatten()
     return res.status(400).json({
       error: "dados de cadastro invalidos",
-      fields: errorFormated
+      fields: errorFormated.fieldErrors
     });
   }
 

@@ -14,20 +14,20 @@ const userSchema = z.object({
       invalid_type_error: "o Nome deve ser uma String",
     })
     .min(2, {
-      messege: "o nome deve conter no minimo 2 caracteres",
+      message: "o nome deve conter no minimo 2 caracteres",
     })
     .max(200, {
-      messege: "o nome deve ter no maximo 200 caracteres",
+      message: "o nome deve ter no maximo 200 caracteres",
     }),
   email: z
     .string({
       required_error: "o Email é obrigatorio",
     })
     .email({
-      messege: "email invalido",
+      message: "email invalido",
     })
     .max(500, {
-      messege: "o email deve ter no maximo 500 caracteres",
+      message: "o email deve ter no maximo 500 caracteres",
     }),
   avatar: z
     .string({
@@ -42,7 +42,7 @@ const userSchema = z.object({
 
 const validadeUserToCreate = (name, email, avatar) => {
   const partialUserSchema = userSchema.partial({ id: true });
-  return partialUserSchema.safeParse(name, email, avatar);
+  return partialUserSchema.safeParse({name, email, avatar});
 };
 
 const getAll = () => {
