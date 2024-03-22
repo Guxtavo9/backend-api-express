@@ -10,7 +10,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-  "origin": ["http://localhost:3000", 'http://localhost:8081/'],
+  "origin": ["http://localhost:3000", 'http://localhost:8081/', 'https://backend-api-express-p6sl.onrender.com/'],
   "methods": ['GET','PUT','POST','DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
