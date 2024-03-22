@@ -11,7 +11,8 @@ const app = express();
 app.use(express.json());
 app.use(cors({
   "origin": ["http://localhost:3000", 'http://localhost:8081/'],
-  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "methods": ['GET','PUT','POST','DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(logger);
 
