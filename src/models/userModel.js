@@ -38,19 +38,19 @@ const userSchema = z.object({
       invalid_type_error: "url invalida",
     })
     .max(1000),
-    pass: z
+  pass: z
     .string({
       required_error: "a Senha é obrigatorio",
       invalid_type_error: "a Senha deve ser uma String",
     })
     .min(8, {
       message: "a senhha deve conter no minimo 6 caracteres",
-    })
+    }),
 });
 
 const validadeUserToCreate = (name, email, avatar, pass) => {
   const partialUserSchema = userSchema.partial({ id: true });
-  return partialUserSchema.safeParse({name, email, avatar, pass});
+  return partialUserSchema.safeParse({ name, email, avatar, pass });
 };
 
 const getAll = () => {
@@ -62,11 +62,26 @@ const getById = (id) => {
 };
 
 const create = (name, email, avatar, pass) => {
-  return prisma.user.create({ data: { name, email, avatar, pass } });
+  return prisma.user.create({
+    data: { name, email, avatar, pass },
+    select: {
+      name: true,
+      email: true,
+      avatar: true,
+    },
+  });
 };
 
 const update = (id, name, email, avatar, pass) => {
-  return prisma.user.update({ where: { id }, data: { name, email, avatar, pass} });
+  return prisma.user.update({
+    where: { id },
+    data: { name, email, avatar, pass },
+    select: {
+      name: true,
+      email: true,
+      avatar: true,
+    },
+  });
 };
 
 const deletear = (id) => {

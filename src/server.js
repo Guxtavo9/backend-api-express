@@ -2,6 +2,7 @@
 import express from "express";
 import cors from "cors";
 import { PORT, HOST } from "./config.js";
+import userRouter from "./routers/authRouter.js";
 import userRouter from "./routers/userRouter.js";
 import productRouter from "./routers/productRouter.js";
 import logger from "./middlewares/logger.js";
