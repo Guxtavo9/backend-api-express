@@ -6,6 +6,7 @@ import userRouter from "./routers/authRouter.js";
 import userRouter from "./routers/userRouter.js";
 import productRouter from "./routers/productRouter.js";
 import logger from "./middlewares/logger.js";
+import cookieParser from 'cookie-parser'
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(logger);
 
 app.use("/user", userRouter);
 app.use("/product", productRouter);
+app.use(cookieParser);
 
 app.post("/post", (req, res) => {
   res.json({

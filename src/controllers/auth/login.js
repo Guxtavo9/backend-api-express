@@ -2,6 +2,7 @@ import userModel from "../../models/userModel";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { SECRET_KEY } from "../../config";
+import sessionModel from "../../models/sessionModel";
 
 const login = async (req, res) => {
   try {
@@ -33,8 +34,20 @@ const login = async (req, res) => {
     const token = jwt.sign(
       { id: userFound.id, name: userFound.name },
       SECRET_KEY,
-      { expiresIn: "3m" }
+      { expiresIn: "1h" }
     );
+    //3 * 30 * 24 * 60 * 60 * 1000,
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+
+    await sessionModel.create({
+      userId: userFound,
+      token,
+    });
 
     res.json({ message: "login" });
   } catch (error) {

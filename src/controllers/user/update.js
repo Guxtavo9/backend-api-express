@@ -4,6 +4,11 @@ import validadeUserToUpdate from '../../models/userModel.js'
 const update = async (req, res) => {
   const { id, name, email, avatar } = req.body;
 
+  if (id !== req.userLogged.id) {
+    return res.status(401).json({ error: "voce não pode atualizar os outros :(" });
+  }
+
+
   const result = userModel.validadeUserToUpdate(id, name, email, avatar);
   console.log(result);
   if (!result.success) {

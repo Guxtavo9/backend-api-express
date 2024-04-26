@@ -24,4 +24,15 @@ model user {
   email  String @unique(map: "email") @db.VarChar(100)
   avatar String @db.Text
   pass   String @db.Text
+  sessions session[]
+}
+
+model session {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  token     String    @db.Text
+  createdAt DateTime  @default(now())
+  user      user      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], name: "userId")
 }

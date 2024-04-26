@@ -4,7 +4,7 @@ import getById from "../controllers/user/getById.js";
 import create from "../controllers/user/create.js";
 import update from "../controllers/user/update.js";
 import removeUser from "../controllers/user/removeUser.js";
-
+import auth from "../middlewares/auth.js";
 
 const router = express.Router();
 
@@ -14,8 +14,8 @@ router.get("/:id", getById);
 
 router.post("/", create);
 
-router.put("/", update);
+router.put("/", auth, update);
 
-router.delete("/:id", removeUser);
+router.delete("/:id", auth, removeUser);
 
 export default router;
