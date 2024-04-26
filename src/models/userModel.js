@@ -52,19 +52,19 @@ const validadeUserToCreate = (name, email, avatar, pass) => {
   const partialUserSchema = userSchema.partial({ id: true });
   return partialUserSchema.safeParse({ name, email, avatar, pass });
 };
+const validadeUserToUpdate = (name, email, avatar, pass) => {
+  const partialUserSchema = userSchema.partial({ pass: true });
+  return partialUserSchema.safeParse({ id, name, email, avatar, });
+};
+const validadeUserToLogin = (name, email, avatar, pass) => {
+  const partialUserSchema = userSchema.partial({ pass: true });
+  return partialUserSchema.safeParse({ id, name, email, avatar, });
+};
 
 const getAll = () => {
-  return prisma.user.findMany();
-};
-
-const getById = (id) => {
-  return prisma.user.findUnique({ where: { id } });
-};
-
-const create = (name, email, avatar, pass) => {
-  return prisma.user.create({
-    data: { name, email, avatar, pass },
+  return prisma.user.findMany({
     select: {
+      id: true,
       name: true,
       email: true,
       avatar: true,
@@ -72,11 +72,44 @@ const create = (name, email, avatar, pass) => {
   });
 };
 
-const update = (id, name, email, avatar, pass) => {
-  return prisma.user.update({
+const getById = (id) => {
+  return prisma.user.findUnique({
     where: { id },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      avatar: true,
+    },
+  });
+};
+
+const getByEmail = (email) => {
+  return prisma.user.findUnique({
+    where: { 
+      email
+     },
+  });
+};
+
+const create = (name, email, avatar, pass) => {
+  return prisma.user.create({
     data: { name, email, avatar, pass },
     select: {
+      id: true,
+      name: true,
+      email: true,
+      avatar: true,
+    },
+  });
+};
+
+const update = (id, name, email, avatar) => {
+  return prisma.user.update({
+    where: { id },
+    data: { name, email, avatar },
+    select: {
+      id: true,
       name: true,
       email: true,
       avatar: true,
@@ -85,14 +118,25 @@ const update = (id, name, email, avatar, pass) => {
 };
 
 const deletear = (id) => {
-  return prisma.delete({ where: { id } });
+  return prisma.delete({
+    where: { id },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      avatar: true,
+    },
+  });
 };
 
 export default {
   getAll,
   getById,
+  getByEmail,
   create,
   update,
   deletear,
   validadeUserToCreate,
+  validadeUserToUpdate,
+  validadeUserToLogin,
 };
